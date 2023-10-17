@@ -1,0 +1,20 @@
+// 시간복잡도 O(N+K) 
+// 정수로 표현할 수 있는 데이터에 한하여 매우 빠른 정렬 알고리즘이다.
+// K가 N보다 작거나 같을 땐 O(N)이다.
+// 선택, 삽입, 퀵 정렬과는 다르게 데이터 비교 기반의 정렬 알고리즘이 아니다.
+// 0부터 최대원소값 크기의 배열을 담아서 원소와 같은 인덱스의 값을 1씩 늘려주는 방법이다.
+
+vector<int> countingSort(vector<int> arr) {
+    int nMax = *max_element(arr.begin(), arr.end()) + 1;
+    vector<int> counting(nMax, 0);
+
+    for (auto& num : arr)
+        counting[num]++;
+
+    vector<int> result;
+    for (int i = 0; i < counting.size(); ++i)
+        for (int j = 0; j < counting[i]; ++j)
+            result.push_back(i);
+
+    return result;
+}
