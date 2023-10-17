@@ -8,12 +8,14 @@ vector<int> quick(vector<int> arr) {
     if (arr.size() <= 1)
         return arr;
 
-    int pivot = (arr.size()-1) / 2;
-    vector<int> tail(arr.begin() + 1, arr.end());
+    int index = (arr.size() - 1) / 2;
+    int pivot = arr[index];
+    vector<int> tail(arr.begin(), arr.end());
 
     vector<int> left , right;
-    for (auto e : tail)
-        e <= pivot ? left.push_back(e) : right.push_back(e);
+    for (int i = 0; i < tail.size(); ++i)
+        if(i != index)
+            tail[i] <= pivot ? left.push_back(tail[i]) : right.push_back(tail[i]);
 
     left = quick(left);
     right = quick(right);
