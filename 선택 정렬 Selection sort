@@ -1,0 +1,26 @@
+// 선택 정렬 Selection sort
+// 시간 복잡도 O(n*n)
+// 차례대로 가장 작은 원소와 비교해가며 위치를 바꾸는 정렬
+// min_element 내부를 살펴보면 반복문으로 최소값이 무엇인지 순회하며 비교하고 있기 때문에 시간 복잡도가 n*n임
+// 참고 : https://cplusplus.com/reference/algorithm/min_element/
+
+int main(void) {
+    vector<int> arr{ 6, 15, 1, 10, 11, 5, 19, 12, 7, 2, 16, 13, 3, 14, 20, 9, 17, 8, 4, 18 };
+    print(arr);
+    
+    clock_t start1, finish1;
+    double duration1;
+    start1 = clock();
+
+    for (int i = 0; i < arr.size(); ++i) {
+        int minIdx = min_element(arr.begin() + i, arr.end()) - arr.begin();
+        swap(arr[minIdx], arr[i]);
+        print(arr);
+    }
+
+    finish1 = clock();
+    duration1 = (double)(finish1 - start1) / CLOCKS_PER_SEC;
+    cout << "\n" << duration1 << "초" << endl;
+
+    return 0;
+}
