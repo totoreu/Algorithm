@@ -1,0 +1,27 @@
+// 시간 복잡도 O(NlogN)
+// 퀵 정렬은 배열을 거의 균등하게 분할하기 때문에 평균적으로 n분의 분할을 수행하므로 O(NLogN)이다.
+// 하지만 피벗을 항상 가작 작거나 가장 큰 원소로 선택하게 된다면 최악의 경우 O(n*n)이 된다.
+// 특히 삽입 정렬과는 다르게 이미 배열이 정렬되어있는 경우는 상성이 좋지 않다.
+// 위와 같은 상황을 피하기위해 랜덤 또는 중간값 피벗을 선택하는것도 방법이다.
+
+vector<int> quick(vector<int> arr) {
+    if (arr.size() <= 1)
+        return arr;
+
+    int pivot = (arr.size()-1) / 2;
+    vector<int> tail(arr.begin() + 1, arr.end());
+
+    vector<int> left , right;
+    for (auto e : tail)
+        e <= pivot ? left.push_back(e) : right.push_back(e);
+
+    left = quick(left);
+    right = quick(right);
+
+    vector<int> result;
+    result.insert(result.end(), left.begin(), left.end());
+    result.push_back(pivot);
+    result.insert(result.end(), right.begin(), right.end());
+
+    return result;
+}
